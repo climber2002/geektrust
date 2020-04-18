@@ -31,6 +31,13 @@ public class FamilyTree {
     return child;
   }
 
+  public Couple marry(String memberName, String spouseName, Gender spouseGender) {
+    FamilyMember member = getFamilyMemberToMarry(memberName);
+    FamilyMember spouse = new FamilyMember(spouseName, spouseGender);
+    addFamilyMember(spouse);
+    return new Couple(member, spouse);
+  }
+
   private void addFamilyMember(FamilyMember familyMember) {
     if(hasFamilyMember(familyMember.getName())) {
       throw new IllegalArgumentException(String.format("Family member %s already exists", familyMember.getName()));
@@ -40,12 +47,28 @@ public class FamilyTree {
   }
 
   private Couple getCoupleByMotherName(String motherName) {
-    FamilyMember mother = familyMembers.computeIfAbsent(motherName,
-      (name) -> { throw new IllegalArgumentException(String.format("Mother name %s doesn't exist", name)); });
+    FamilyMember mother = getFamilyMember(motherName);
     if(!mother.getGender().equals(FEMALE)) {
       throw new IllegalArgumentException(String.format("The name %s is not female", motherName));
     }
     return mother.getCouple().orElseThrow(
       () -> new IllegalArgumentException(String.format("%s has no spouse yet", motherName)));
   }
+
+  private FamilyMember getFamilyMemberToMarry(String memberName) {
+    FamilyMember member = getFamilyMember(memberName);
+    if(member.isMarried()) {
+      throw new IllegalArgumentException(String.format("%s is already married", memberName));
+    }
+    return member;
+  }
+
+  private FamilyMember getFamilyMember(String memberName) {
+    return familyMembers.computeIfAbsent(memberName,
+        (name) -> { throw new IllegalArgumentException(String.format("Member name %s doesn't exist", name)); });
+  }
+
+
+
+
 }

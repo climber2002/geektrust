@@ -2,6 +2,8 @@ package geektrust;
 
 import java.util.Optional;
 
+import static geektrust.Gender.MALE;
+
 public class FamilyMember {
   private final String name;
   private final Gender gender;
@@ -38,11 +40,25 @@ public class FamilyMember {
     return this.couple;
   }
 
+  public Optional<FamilyMember> getSpouse() {
+    return this.couple.map(couple -> {
+      if(this.getGender().equals(MALE)) {
+        return couple.getFemaleSpouse();
+      } else {
+        return couple.getMaleSpouse();
+      }
+    });
+  }
+
   public Optional<FamilyMember> getFather() {
     return this.parents.map(couple -> couple.getMaleSpouse());
   }
 
   public Optional<FamilyMember> getMother() {
     return this.parents.map(couple -> couple.getFemaleSpouse());
+  }
+
+  public boolean isMarried() {
+    return this.couple.isPresent();
   }
 }

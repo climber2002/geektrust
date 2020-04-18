@@ -42,7 +42,7 @@ public class FamilyTreeTest {
     Exception exception = assertThrows(IllegalArgumentException.class, () -> {
       familyTree.addChild("Nobody", "Percy", MALE);
     });
-    assertEquals("Mother name Nobody doesn't exist", exception.getMessage());
+    assertEquals("Member name Nobody doesn't exist", exception.getMessage());
   }
 
   @Test
@@ -53,5 +53,53 @@ public class FamilyTreeTest {
       familyTree.addChild("Margret", "Percy", MALE);
     });
     assertEquals("Family member Percy already exists", exception.getMessage());
+  }
+
+  @Test
+  public void testAddChild_addFromFather() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.addChild("Arthur", "Percy", MALE);
+    });
+    assertEquals("The name Arthur is not female", exception.getMessage());
+  }
+
+  @Test
+  public void testMarry() {
+    familyTree.addChild("Margret", "Percy", MALE);
+
+    Couple couple = familyTree.marry("Percy", "Audrey", FEMALE);
+    FamilyMember audrey = couple.getFemaleSpouse();
+    assertEquals("Audrey", audrey.getName());
+    assertEquals(FEMALE, audrey.getGender());
+    assertSame("Percy", audrey.getSpouse().get().getName());
+  }
+
+  @Test
+  public void testMarry_memberToMarryNotExist() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.marry("Nobody", "Audrey", FEMALE);
+    });
+    assertEquals("Member name Nobody doesn't exist", exception.getMessage());
+  }
+
+  @Test
+  public void testMarry_spouseAlreadyExist() {
+    familyTree.addChild("Margret", "Percy", MALE);
+    familyTree.addChild("Margret", "Audrey", MALE);
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.marry("Percy", "Audrey", FEMALE);
+    });
+    assertEquals("Family member Audrey already exists", exception.getMessage());
+  }
+
+  @Test
+  public void testMarry_sameGender() {
+    familyTree.addChild("Margret", "Percy", MALE);
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.marry("Percy", "Audrey", MALE);
+    });
+    assertEquals("Same gender can't be couple", exception.getMessage());
   }
 }
