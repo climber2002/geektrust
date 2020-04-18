@@ -18,7 +18,7 @@ public class GetRelationship extends AbstractCommand {
   @Override
   public String executeImpl(FamilyTree familyTree) {
     Relationship relationship = getRelationship(familyTree);
-    List<String> relationshipNames = relationship.getNames(memberName);
+    List<String> relationshipNames = relationship.getNameOfRelationships(memberName);
     if(relationshipNames.isEmpty()) {
       return "NONE";
     } else {

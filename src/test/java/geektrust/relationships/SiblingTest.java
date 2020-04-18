@@ -13,13 +13,13 @@ public class SiblingTest {
   private Relationship sibling = new Sibling(familyTree);
 
   @Test
-  public void testGetNames_hasSiblings() {
+  public void testGetNameOfRelationships_hasSiblings() {
     assertArrayEquals(new String[] { "Bill", "Charlie", "Percy", "Ginerva" },
-      sibling.getNames("Ronald").toArray(new String[0]));
+      sibling.getNameOfRelationships("Ronald").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_niSibling() {
-    assertTrue(sibling.getNames("Remus").isEmpty());
+  public void testGetNameOfRelationships_niSibling() {
+    assertTrue(sibling.getNameOfRelationships("Remus").isEmpty());
   }
 }

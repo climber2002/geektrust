@@ -14,17 +14,18 @@ public class SonTest {
   private Relationship son = new Son(familyTree);
 
   @Test
-  public void testGetNames_hasSon() {
-    assertArrayEquals(new String[] { "Bill", "Charlie", "Percy", "Ronald" }, son.getNames("Margret").toArray(new String[0]));
+  public void testGetNameOfRelationships_hasSon() {
+    assertArrayEquals(new String[] { "Bill", "Charlie", "Percy", "Ronald" },
+      son.getNameOfRelationships("Margret").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_noChildren() {
-    assertTrue(son.getNames("Charlie").isEmpty());
+  public void testGetNameOfRelationships_noChildren() {
+    assertTrue(son.getNameOfRelationships("Charlie").isEmpty());
   }
 
   @Test
-  public void testGetNames_onlyDaughters() {
-    assertTrue(son.getNames("Audrey").isEmpty());
+  public void testGetNameOfRelationships_onlyDaughters() {
+    assertTrue(son.getNameOfRelationships("Audrey").isEmpty());
   }
 }

@@ -13,19 +13,19 @@ public class BrotherInLawTest {
   private Relationship brotherInLaw = new BrotherInLaw(familyTree);
 
   @Test
-  public void testGetNames_hasSpouseBrothers() {
+  public void testGetNameOfRelationships_hasSpouseBrothers() {
     assertArrayEquals(new String[] { "Bill", "Charlie", "Percy", "Ronald" },
-      brotherInLaw.getNames("Harry").toArray(new String[0]));
+      brotherInLaw.getNameOfRelationships("Harry").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_hasSiblingHusbands() {
+  public void testGetNameOfRelationships_hasSiblingHusbands() {
     assertArrayEquals(new String[] { "Ted" },
-      brotherInLaw.getNames("Dominique").toArray(new String[0]));
+      brotherInLaw.getNameOfRelationships("Dominique").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_hasNoSpouseNorSiblings() {
-    assertTrue(brotherInLaw.getNames("Aster").isEmpty());
+  public void testGetNameOfRelationships_hasNoSpouseNorSiblings() {
+    assertTrue(brotherInLaw.getNameOfRelationships("Aster").isEmpty());
   }
 }

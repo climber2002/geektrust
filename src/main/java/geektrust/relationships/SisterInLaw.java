@@ -17,7 +17,7 @@ public class SisterInLaw extends AbstractRelationship {
   }
 
   @Override
-  public List<FamilyMember> get(String memberName) {
+  public List<FamilyMember> getRelationships(String memberName) {
     FamilyMember familyMember = getFamilyMember(memberName);
     List<FamilyMember> result = new ArrayList<>();
     result.addAll(getSpouseSisters(familyMember));

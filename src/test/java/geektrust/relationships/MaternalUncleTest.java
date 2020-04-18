@@ -13,18 +13,18 @@ public class MaternalUncleTest {
   private Relationship maternalUncle = new MaternalUncle(familyTree);
 
   @Test
-  public void testGetNames_hasMaternalUncle() {
+  public void testGetNameOfRelationships_hasMaternalUncle() {
     assertArrayEquals(new String[] { "Bill", "Charlie", "Percy", "Ronald" },
-      maternalUncle.getNames("James").toArray(new String[0]));
+      maternalUncle.getNameOfRelationships("James").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_noMother() {
-    assertTrue(maternalUncle.getNames("Margret").isEmpty());
+  public void testGetNameOfRelationships_noMother() {
+    assertTrue(maternalUncle.getNameOfRelationships("Margret").isEmpty());
   }
 
   @Test
-  public void testGetNames_motherHasNoBrother() {
-    assertTrue(maternalUncle.getNames("Louis").isEmpty());
+  public void testGetNameOfRelationships_motherHasNoBrother() {
+    assertTrue(maternalUncle.getNameOfRelationships("Louis").isEmpty());
   }
 }

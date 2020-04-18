@@ -12,7 +12,7 @@ public class PaternalUncle extends AbstractRelationship {
   }
 
   @Override
-  public List<FamilyMember> get(String memberName) {
+  public List<FamilyMember> getRelationships(String memberName) {
     return getFatherOf(memberName).map(father -> getSiblingsOf(father, FamilyMember::isMale))
       .orElse(Collections.emptyList());
   }

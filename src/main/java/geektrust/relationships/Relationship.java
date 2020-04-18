@@ -10,12 +10,12 @@ public interface Relationship {
    * @param memberName
    * @return
    */
-  public List<FamilyMember> get(String memberName);
+  public List<FamilyMember> getRelationships(String memberName);
 
   /**
    * Same as get, but only return the names of all relationships
    * @param memberName
    * @return
    */
-  public List<String> getNames(String memberName);
+  public List<String> getNameOfRelationships(String memberName);
 }

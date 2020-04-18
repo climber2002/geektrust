@@ -14,7 +14,7 @@ public class Daughter extends AbstractRelationship {
   }
 
   @Override
-  public List<FamilyMember> get(String memberName) {
+  public List<FamilyMember> getRelationships(String memberName) {
     return getFamilyMember(memberName).getCouple().map(couple -> getChildrenOf(couple, FamilyMember::isFemale))
       .orElse(Collections.emptyList());
   }

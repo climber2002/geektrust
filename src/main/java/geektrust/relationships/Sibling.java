@@ -11,7 +11,7 @@ public class Sibling extends AbstractRelationship {
   }
 
   @Override
-  public List<FamilyMember> get(String memberName) {
+  public List<FamilyMember> getRelationships(String memberName) {
     FamilyMember member = this.getFamilyMember(memberName);
     return getSiblingsOf(member, sibling -> true);
   }

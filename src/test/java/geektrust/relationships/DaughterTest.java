@@ -13,17 +13,18 @@ public class DaughterTest {
   private Relationship daughter = new Daughter(familyTree);
 
   @Test
-  public void testGetNames_hasDaughter() {
-    assertArrayEquals(new String[] { "Ginerva" }, daughter.getNames("Margret").toArray(new String[0]));
+  public void testGetNameOfRelationships_hasDaughter() {
+    assertArrayEquals(new String[] { "Ginerva" },
+      daughter.getNameOfRelationships("Margret").toArray(new String[0]));
   }
 
   @Test
-  public void testGetNames_noChildren() {
-    assertTrue(daughter.getNames("Charlie").isEmpty());
+  public void testGetNameOfRelationships_noChildren() {
+    assertTrue(daughter.getNameOfRelationships("Charlie").isEmpty());
   }
 
   @Test
-  public void testGetNames_noDaughters() {
-    assertTrue(daughter.getNames("Ted").isEmpty());
+  public void testGetNameOfRelationships_noDaughters() {
+    assertTrue(daughter.getNameOfRelationships("Ted").isEmpty());
   }
 }

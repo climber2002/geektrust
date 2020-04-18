@@ -3,15 +3,12 @@ package geektrust.relationships;
 import geektrust.Couple;
 import geektrust.FamilyMember;
 import geektrust.FamilyTree;
-import geektrust.Gender;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static geektrust.Gender.MALE;
 
 public abstract class AbstractRelationship implements Relationship {
   protected final FamilyTree familyTree;
@@ -20,10 +17,10 @@ public abstract class AbstractRelationship implements Relationship {
     this.familyTree = familyTree;
   }
 
-  public abstract List<FamilyMember> get(String memberName);
+  public abstract List<FamilyMember> getRelationships(String memberName);
 
-  public List<String> getNames(String memberName) {
-    return get(memberName).stream().map(member -> member.getName()).collect(Collectors.toList());
+  public List<String> getNameOfRelationships(String memberName) {
+    return getRelationships(memberName).stream().map(member -> member.getName()).collect(Collectors.toList());
   }
 
   protected FamilyMember getFamilyMember(String memberName) {

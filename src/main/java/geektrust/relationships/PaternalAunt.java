@@ -15,7 +15,7 @@ public class PaternalAunt extends AbstractRelationship {
   }
 
   @Override
-  public List<FamilyMember> get(String memberName) {
+  public List<FamilyMember> getRelationships(String memberName) {
     return getFatherOf(memberName).map(father -> getSiblingsOf(father, FamilyMember::isFemale))
       .orElse(Collections.emptyList());
   }
