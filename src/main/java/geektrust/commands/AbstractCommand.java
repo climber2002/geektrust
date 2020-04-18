@@ -17,7 +17,7 @@ public abstract class AbstractCommand implements Command {
     } catch (PersonNotFoundException ex) {
       return "PERSON_NOT_FOUND";
     } catch (PersonAlreadyExistException ex) {
-      return "CHILD_ALREADY_EXISTS";
+      return "PERSON_ALREADY_EXISTS";
     } catch (IllegalArgumentException ex) {
       return "INVALID_COMMAND";
     }
