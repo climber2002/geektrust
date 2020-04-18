@@ -1,16 +1,22 @@
 package geektrust;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static geektrust.Gender.FEMALE;
 import static geektrust.Gender.MALE;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FamilyTreeTest {
   private final FamilyMember arthur = new FamilyMember("Arthur", MALE);
   private final FamilyMember margret = new FamilyMember("Margret", FEMALE);
 
-  private final FamilyTree familyTree = new FamilyTree(arthur, margret);
+  private FamilyTree familyTree;
+
+  @BeforeEach
+  public void before() {
+    familyTree = new FamilyTree(arthur, margret);
+  }
 
   @Test
   public void testCreation() {
@@ -31,14 +37,21 @@ public class FamilyTreeTest {
     assertSame(margret, percy.getMother().get());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testAddChild_motherNotExists() {
-    FamilyMember percy = familyTree.addChild("Nobody", "Percy", MALE);
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.addChild("Nobody", "Percy", MALE);
+    });
+    assertEquals("Mother name Nobody doesn't exist", exception.getMessage());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testAddChild_memberAlreadyExists() {
     familyTree.addChild("Margret", "Percy", MALE);
-    familyTree.addChild("Margret", "Percy", MALE);
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      familyTree.addChild("Margret", "Percy", MALE);
+    });
+    assertEquals("Family member Percy already exists", exception.getMessage());
   }
 }

@@ -1,11 +1,11 @@
 package geektrust;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static geektrust.Gender.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CoupleTest {
   private final FamilyMember arthur = new FamilyMember("Arthur", MALE);
@@ -32,9 +32,12 @@ public class CoupleTest {
     assertTrue(couple.getChildren().isEmpty());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testCreation_sameGender() {
-    new Couple(arthur, bill);
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+      new Couple(arthur, bill);
+    });
+    assertEquals("Same gender can't be couple", exception.getMessage());
   }
 
   @Test

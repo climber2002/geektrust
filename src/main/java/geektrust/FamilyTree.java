@@ -41,7 +41,7 @@ public class FamilyTree {
 
   private Couple getCoupleByMotherName(String motherName) {
     FamilyMember mother = familyMembers.computeIfAbsent(motherName,
-      (name) -> { throw new IllegalArgumentException(String.format("Mother name %s not exist", name)); });
+      (name) -> { throw new IllegalArgumentException(String.format("Mother name %s doesn't exist", name)); });
     if(!mother.getGender().equals(FEMALE)) {
       throw new IllegalArgumentException(String.format("The name %s is not female", motherName));
     }
