@@ -2,6 +2,7 @@ package geektrust;
 
 import java.util.Optional;
 
+import static geektrust.Gender.FEMALE;
 import static geektrust.Gender.MALE;
 
 public class FamilyMember {
@@ -60,5 +61,13 @@ public class FamilyMember {
 
   public boolean isMarried() {
     return this.couple.isPresent();
+  }
+
+  public boolean isMale() {
+    return this.getGender().equals(MALE);
+  }
+
+  public boolean isFemale() {
+    return this.getGender().equals(FEMALE);
   }
 }

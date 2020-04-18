@@ -3,9 +3,7 @@ package geektrust.relationships;
 import geektrust.FamilyMember;
 import geektrust.FamilyTree;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Sibling extends AbstractRelationship {
   public Sibling(FamilyTree familyTree) {
@@ -15,6 +13,6 @@ public class Sibling extends AbstractRelationship {
   @Override
   public List<FamilyMember> get(String memberName) {
     FamilyMember member = this.getFamilyMember(memberName);
-    return getSiblingsOf(member);
+    return getSiblingsOf(member, sibling -> true);
   }
 }

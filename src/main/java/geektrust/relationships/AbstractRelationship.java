@@ -8,6 +8,7 @@ import geektrust.Gender;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static geektrust.Gender.MALE;
@@ -37,19 +38,15 @@ public abstract class AbstractRelationship implements Relationship {
     return this.getFamilyMember(memberName).getMother();
   }
 
-  protected List<FamilyMember> getChildrenOfGender(Couple couple, Gender gender) {
-    return couple.getChildren().stream().filter(child -> child.getGender().equals(gender)).collect(Collectors.toList());
+  protected List<FamilyMember> getChildrenOf(Couple couple, Predicate<FamilyMember> childPredicate) {
+    return couple.getChildren().stream().filter(child -> childPredicate.test(child)).collect(Collectors.toList());
   }
 
-  protected List<FamilyMember> getSiblingsOf(FamilyMember member) {
+  protected List<FamilyMember> getSiblingsOf(FamilyMember member, Predicate<FamilyMember> siblingPredicate) {
     return member.getParents().map(parents -> parents.getChildren().stream()
-        .filter(sibling -> !sibling.getName().equals(member.getName())).collect(Collectors.toList()))
+        .filter(sibling -> !sibling.getName().equals(member.getName()))
+        .filter(sibling -> siblingPredicate.test(sibling)).collect(Collectors.toList()))
       .orElse(Collections.emptyList());
-  }
-
-  protected List<FamilyMember> getSiblingsWithGender(FamilyMember member, Gender gender) {
-    return getSiblingsOf(member).stream().filter(sibling ->
-      sibling.getGender().equals(gender)).collect(Collectors.toList());
   }
 
 }

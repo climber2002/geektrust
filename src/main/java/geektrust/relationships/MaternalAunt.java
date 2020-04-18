@@ -16,7 +16,7 @@ public class MaternalAunt extends AbstractRelationship {
 
   @Override
   public List<FamilyMember> get(String memberName) {
-    return getMotherOf(memberName).map(mother -> getSiblingsWithGender(mother, FEMALE))
+    return getMotherOf(memberName).map(mother -> getSiblingsOf(mother, FamilyMember::isFemale))
       .orElse(Collections.emptyList());
   }
 }
