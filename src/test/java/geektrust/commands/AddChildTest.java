@@ -36,4 +36,10 @@ public class AddChildTest {
     assertEquals("CHILD_ADDITION_FAILED", addChild.execute(familyTree));
     assertFalse(familyTree.hasFamilyMember("Bella"));
   }
+
+  @Test
+  public void testExecute_invalidGender() {
+    addChild = new AddChild("Flora", "Minerva", "Unknown");
+    assertEquals("INVALID_COMMAND", addChild.execute(familyTree));
+  }
 }

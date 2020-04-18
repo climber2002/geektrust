@@ -2,28 +2,28 @@ package geektrust.commands;
 
 import geektrust.*;
 
-public class AddChild implements Command {
+public class AddChild extends AbstractCommand {
   private final String motherName;
   private final String childName;
-  private final Gender childGender;
+  private final String childGenderName;
 
-  public AddChild(String motherName, String childName, String childGender) {
+  public AddChild(String motherName, String childName, String childGenderName) {
     this.motherName = motherName;
     this.childName = childName;
-    this.childGender = Gender.valueOf(childGender.toUpperCase());
+    this.childGenderName = childGenderName;
   }
 
   @Override
-  public String execute(FamilyTree familyTree) {
+  public String executeImpl(FamilyTree familyTree) {
     try {
-      familyTree.addChild(motherName, childName, childGender);
+      familyTree.addChild(motherName, childName, getChildGender());
       return "CHILD_ADDITION_SUCCEEDED";
     } catch (AddChildException ex) {
       return "CHILD_ADDITION_FAILED";
-    } catch (PersonNotFoundException ex) {
-      return "PERSON_NOT_FOUND";
-    } catch (PersonAlreadyExistException ex) {
-      return "CHILD_ALREADY_EXISTS";
     }
+  }
+
+  protected Gender getChildGender() {
+    return Gender.valueOf(childGenderName.toUpperCase());
   }
 }
