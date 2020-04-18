@@ -5,7 +5,9 @@ import geektrust.FamilyMember;
 import geektrust.FamilyTree;
 import geektrust.Gender;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class AbstractRelationship implements Relationship {
@@ -25,7 +27,18 @@ public abstract class AbstractRelationship implements Relationship {
     return familyTree.getFamilyMember(memberName);
   }
 
+  protected Optional<FamilyMember> getFatherOf(String memberName) {
+    return this.getFamilyMember(memberName).getFather();
+  }
+
   protected List<FamilyMember> getChildrenOfGender(Couple couple, Gender gender) {
     return couple.getChildren().stream().filter(child -> child.getGender().equals(gender)).collect(Collectors.toList());
   }
+
+  protected List<FamilyMember> getSiblingsOf(FamilyMember member) {
+    return member.getParents().map(parents -> parents.getChildren().stream()
+      .filter(sibling -> !sibling.getName().equals(member.getName())).collect(Collectors.toList()))
+      .orElse(Collections.emptyList());
+  }
+
 }
