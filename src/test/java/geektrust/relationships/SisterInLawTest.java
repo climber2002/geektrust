@@ -5,6 +5,7 @@ import geektrust.FamilyTreeBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SisterInLawTest {
   private FamilyTree familyTree = new FamilyTreeBuilder().build();
@@ -21,5 +22,10 @@ public class SisterInLawTest {
   public void testGetNames_hasSiblingWives() {
     assertArrayEquals(new String[] { "Flora", "Audrey" },
       sisterInLaw.getNames("Ronald").toArray(new String[0]));
+  }
+
+  @Test
+  public void testGetNames_hasNoSpouseNorSiblings() {
+    assertTrue(sisterInLaw.getNames("Aster").isEmpty());
   }
 }
