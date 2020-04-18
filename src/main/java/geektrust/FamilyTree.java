@@ -2,7 +2,6 @@ package geektrust;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static geektrust.Gender.FEMALE;
 
@@ -26,13 +25,13 @@ public class FamilyTree {
 
   public FamilyMember getFamilyMember(String memberName) {
     return familyMembers.computeIfAbsent(memberName,
-      (name) -> { throw new IllegalArgumentException(String.format("Member name %s doesn't exist", name)); });
+      (name) -> { throw new PersonNotFoundException(String.format("Member name %s doesn't exist", name)); });
   }
 
   public FamilyMember addChild(String motherName, String childName, Gender childGender) {
+    Couple couple = getCoupleByMotherName(motherName);
     FamilyMember child = new FamilyMember(childName, childGender);
     addFamilyMember(child);
-    Couple couple = getCoupleByMotherName(motherName);
     couple.addChild(child);
     return child;
   }
@@ -46,7 +45,7 @@ public class FamilyTree {
 
   private void addFamilyMember(FamilyMember familyMember) {
     if(hasFamilyMember(familyMember.getName())) {
-      throw new IllegalArgumentException(String.format("Family member %s already exists", familyMember.getName()));
+      throw new PersonAlreadyExistException(String.format("Family member %s already exists", familyMember.getName()));
     }
 
     this.familyMembers.put(familyMember.getName(), familyMember);
@@ -55,16 +54,16 @@ public class FamilyTree {
   private Couple getCoupleByMotherName(String motherName) {
     FamilyMember mother = getFamilyMember(motherName);
     if(!mother.getGender().equals(FEMALE)) {
-      throw new IllegalArgumentException(String.format("The name %s is not female", motherName));
+      throw new AddChildException(String.format("The name %s is not female", motherName));
     }
     return mother.getCouple().orElseThrow(
-      () -> new IllegalArgumentException(String.format("%s has no spouse yet", motherName)));
+      () -> new AddChildException(String.format("%s has no spouse yet", motherName)));
   }
 
   private FamilyMember getFamilyMemberToMarry(String memberName) {
     FamilyMember member = getFamilyMember(memberName);
     if(member.isMarried()) {
-      throw new IllegalArgumentException(String.format("%s is already married", memberName));
+      throw new MarryMemberException(String.format("%s is already married", memberName));
     }
     return member;
   }

@@ -34,7 +34,7 @@ public class CoupleTest {
 
   @Test
   public void testCreation_sameGender() {
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+    Exception exception = assertThrows(MarryMemberException.class, () -> {
       new Couple(arthur, bill);
     });
     assertEquals("Same gender can't be couple", exception.getMessage());

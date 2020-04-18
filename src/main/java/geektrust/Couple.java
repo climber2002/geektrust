@@ -11,7 +11,7 @@ public class Couple {
 
   public Couple(FamilyMember spouse1, FamilyMember spouse2) {
     if(spouse1.getGender().equals(spouse2.getGender())) {
-      throw new IllegalArgumentException("Same gender can't be couple");
+      throw new MarryMemberException("Same gender can't be couple");
     }
     if(spouse1.getGender().equals(Gender.MALE)) {
       this.maleSpouse = spouse1;
