@@ -3,10 +3,8 @@ package geektrust.relationships;
 import geektrust.FamilyMember;
 import geektrust.FamilyTree;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static geektrust.Gender.MALE;
 
