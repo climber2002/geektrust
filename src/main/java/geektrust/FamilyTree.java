@@ -24,6 +24,11 @@ public class FamilyTree {
     return familyMembers.containsKey(name);
   }
 
+  public FamilyMember getFamilyMember(String memberName) {
+    return familyMembers.computeIfAbsent(memberName,
+      (name) -> { throw new IllegalArgumentException(String.format("Member name %s doesn't exist", name)); });
+  }
+
   public FamilyMember addChild(String motherName, String childName, Gender childGender) {
     FamilyMember child = new FamilyMember(childName, childGender);
     addFamilyMember(child);
@@ -37,10 +42,6 @@ public class FamilyTree {
     FamilyMember spouse = new FamilyMember(spouseName, spouseGender);
     addFamilyMember(spouse);
     return new Couple(member, spouse);
-  }
-
-  public Optional<FamilyMember> fetchFamilyMember(String memberName) {
-    return Optional.ofNullable(this.familyMembers.get(memberName));
   }
 
   private void addFamilyMember(FamilyMember familyMember) {
@@ -67,13 +68,4 @@ public class FamilyTree {
     }
     return member;
   }
-
-  private FamilyMember getFamilyMember(String memberName) {
-    return familyMembers.computeIfAbsent(memberName,
-        (name) -> { throw new IllegalArgumentException(String.format("Member name %s doesn't exist", name)); });
-  }
-
-
-
-
 }

@@ -46,7 +46,7 @@ public class FamilyTreeBuilderTest {
   }
 
   private void assertParentsChildren(String fatherName, String motherName, String[] childrenName) {
-    FamilyMember father = familyTree.fetchFamilyMember(fatherName).get();
+    FamilyMember father = familyTree.getFamilyMember(fatherName);
     Couple parents = father.getCouple().get();
     assertEquals(motherName, parents.getFemaleSpouse().getName());
 
