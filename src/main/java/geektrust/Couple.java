@@ -20,6 +20,8 @@ public class Couple {
       this.maleSpouse = spouse2;
       this.femaleSpouse = spouse1;
     }
+    this.maleSpouse.setCouple(this);
+    this.femaleSpouse.setCouple(this);
   }
 
   public FamilyMember getMaleSpouse() {

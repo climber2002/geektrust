@@ -5,6 +5,8 @@ import java.util.Optional;
 public class FamilyMember {
   private final String name;
   private final Gender gender;
+
+  private Optional<Couple> couple = Optional.empty();
   private Optional<Couple> parents = Optional.empty();
 
   public FamilyMember(String name, Gender gender) {
@@ -26,5 +28,21 @@ public class FamilyMember {
 
   public Optional<Couple> getParents() {
     return this.parents;
+  }
+
+  void setCouple(Couple couple) {
+    this.couple = Optional.of(couple);
+  }
+
+  public Optional<Couple> getCouple() {
+    return this.couple;
+  }
+
+  public Optional<FamilyMember> getFather() {
+    return this.parents.map(couple -> couple.getMaleSpouse());
+  }
+
+  public Optional<FamilyMember> getMother() {
+    return this.parents.map(couple -> couple.getFemaleSpouse());
   }
 }

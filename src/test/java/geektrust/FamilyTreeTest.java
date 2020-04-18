@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import static geektrust.Gender.FEMALE;
 import static geektrust.Gender.MALE;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class FamilyTreeTest {
   private final FamilyMember arthur = new FamilyMember("Arthur", MALE);
@@ -21,5 +20,25 @@ public class FamilyTreeTest {
 
     assertTrue(familyTree.hasFamilyMember("Arthur"));
     assertTrue(familyTree.hasFamilyMember("Margret"));
+  }
+
+  @Test
+  public void testAddChild() {
+    FamilyMember percy = familyTree.addChild("Margret", "Percy", MALE);
+    assertEquals("Percy", percy.getName());
+    assertEquals(MALE, percy.getGender());
+    assertSame(arthur, percy.getFather().get());
+    assertSame(margret, percy.getMother().get());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddChild_motherNotExists() {
+    FamilyMember percy = familyTree.addChild("Nobody", "Percy", MALE);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddChild_memberAlreadyExists() {
+    familyTree.addChild("Margret", "Percy", MALE);
+    familyTree.addChild("Margret", "Percy", MALE);
   }
 }

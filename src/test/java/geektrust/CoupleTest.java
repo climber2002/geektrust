@@ -20,6 +20,8 @@ public class CoupleTest {
     assertSame(arthur, couple.getMaleSpouse());
     assertSame(margret, couple.getFemaleSpouse());
     assertTrue(couple.getChildren().isEmpty());
+    assertSame(couple, arthur.getCouple().get());
+    assertSame(couple, margret.getCouple().get());
   }
 
   @Test
