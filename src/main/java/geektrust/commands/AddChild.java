@@ -23,6 +23,18 @@ public class AddChild extends AbstractCommand {
     }
   }
 
+  public String getMotherName() {
+    return motherName;
+  }
+
+  public String getChildName() {
+    return childName;
+  }
+
+  public String getChildGenderName() {
+    return childGenderName;
+  }
+
   protected Gender getChildGender() {
     return Gender.valueOf(childGenderName.toUpperCase());
   }

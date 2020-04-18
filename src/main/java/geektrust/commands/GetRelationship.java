@@ -26,6 +26,14 @@ public class GetRelationship extends AbstractCommand {
     }
   }
 
+  public String getMemberName() {
+    return memberName;
+  }
+
+  public String getRelationshipName() {
+    return relationshipName;
+  }
+
   private Relationship getRelationship(FamilyTree familyTree) {
     Relationship relationship = null;
     switch (this.relationshipName) {
