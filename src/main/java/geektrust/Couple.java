@@ -1,8 +1,13 @@
 package geektrust;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Couple {
   private final FamilyMember maleSpouse;
   private final FamilyMember femaleSpouse;
+
+  private final List<FamilyMember> children = new ArrayList<>();
 
   public Couple(FamilyMember spouse1, FamilyMember spouse2) {
     if(spouse1.getGender().equals(spouse2.getGender())) {
@@ -23,5 +28,14 @@ public class Couple {
 
   public FamilyMember getFemaleSpouse() {
     return this.femaleSpouse;
+  }
+
+  public List<FamilyMember> getChildren() {
+    return new ArrayList(this.children);
+  }
+
+  public void addChild(FamilyMember child) {
+    this.children.add(child);
+    child.setParents(this);
   }
 }
