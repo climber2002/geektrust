@@ -2,6 +2,7 @@ package geektrust;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static geektrust.Gender.FEMALE;
 
@@ -36,6 +37,10 @@ public class FamilyTree {
     FamilyMember spouse = new FamilyMember(spouseName, spouseGender);
     addFamilyMember(spouse);
     return new Couple(member, spouse);
+  }
+
+  public Optional<FamilyMember> fetchFamilyMember(String memberName) {
+    return Optional.ofNullable(this.familyMembers.get(memberName));
   }
 
   private void addFamilyMember(FamilyMember familyMember) {
