@@ -8,22 +8,20 @@ import geektrust.Gender;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class AbstractRelationship {
-  protected final String memberName;
+public abstract class AbstractRelationship implements Relationship {
   protected final FamilyTree familyTree;
 
-  public AbstractRelationship(String memberName, FamilyTree familyTree) {
-    this.memberName = memberName;
+  public AbstractRelationship(FamilyTree familyTree) {
     this.familyTree = familyTree;
   }
 
-  public abstract List<FamilyMember> get();
+  public abstract List<FamilyMember> get(String memberName);
 
-  public List<String> getNames() {
-    return get().stream().map(member -> member.getName()).collect(Collectors.toList());
+  public List<String> getNames(String memberName) {
+    return get(memberName).stream().map(member -> member.getName()).collect(Collectors.toList());
   }
 
-  protected FamilyMember getFamilyMember() {
+  protected FamilyMember getFamilyMember(String memberName) {
     return familyTree.getFamilyMember(memberName);
   }
 

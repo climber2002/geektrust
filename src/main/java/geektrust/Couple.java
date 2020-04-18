@@ -33,7 +33,7 @@ public class Couple {
   }
 
   public List<FamilyMember> getChildren() {
-    return new ArrayList(this.children);
+    return new ArrayList<>(this.children);
   }
 
   public void addChild(FamilyMember child) {

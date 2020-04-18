@@ -12,24 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DaughterTest {
   private FamilyTree familyTree = new FamilyTreeBuilder().build();
 
-  private AbstractRelationship daughter;
+  private Relationship daughter = new Daughter(familyTree);
 
   @Test
   public void testGetNames_hasDaughter() {
-    this.daughter = new Daughter("Margret", familyTree);
-    assertArrayEquals(new String[] { "Ginerva" }, daughter.getNames().toArray(new String[0]));
+    assertArrayEquals(new String[] { "Ginerva" }, daughter.getNames("Margret").toArray(new String[0]));
   }
 
   @Test
   public void testGetNames_noChildren() {
-    this.daughter = new Daughter("Charlie", familyTree);
-    assertTrue(daughter.getNames().isEmpty());
+    assertTrue(daughter.getNames("Charlie").isEmpty());
   }
 
   @Test
   public void testGetNames_noDaughters() {
-    this.daughter = new Daughter("Ted", familyTree);
-    System.out.println(Arrays.toString(daughter.getNames().toArray(new String[0])));
-    assertTrue(daughter.getNames().isEmpty());
+    assertTrue(daughter.getNames("Ted").isEmpty());
   }
 }

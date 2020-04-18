@@ -7,16 +7,15 @@ import java.util.Collections;
 import java.util.List;
 
 import static geektrust.Gender.FEMALE;
-import static geektrust.Gender.MALE;
 
 public class Daughter extends AbstractRelationship {
-  public Daughter(String memberName, FamilyTree familyTree) {
-    super(memberName, familyTree);
+  public Daughter(FamilyTree familyTree) {
+    super(familyTree);
   }
 
   @Override
-  public List<FamilyMember> get() {
-    return getFamilyMember().getCouple().map(couple -> getChildrenOfGender(couple, FEMALE))
+  public List<FamilyMember> get(String memberName) {
+    return getFamilyMember(memberName).getCouple().map(couple -> getChildrenOfGender(couple, FEMALE))
       .orElse(Collections.emptyList());
   }
 

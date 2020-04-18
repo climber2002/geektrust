@@ -10,13 +10,13 @@ import static geektrust.Gender.MALE;
 
 public class Son extends AbstractRelationship {
 
-  public Son(String memberName, FamilyTree familyTree) {
-    super(memberName, familyTree);
+  public Son(FamilyTree familyTree) {
+    super(familyTree);
   }
 
   @Override
-  public List<FamilyMember> get() {
-    return getFamilyMember().getCouple().map(couple -> getChildrenOfGender(couple, MALE))
+  public List<FamilyMember> get(String memberName) {
+    return getFamilyMember(memberName).getCouple().map(couple -> getChildrenOfGender(couple, MALE))
                             .orElse(Collections.emptyList());
   }
 }
